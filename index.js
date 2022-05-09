@@ -31,6 +31,12 @@ async function run() {
             const query = { _id: ObjectId(id) };
             const inventory = await inventoryCollection.findOne(query);
             res.send(inventory);
+        });
+        //post
+        app.post("/inventory", async (req, res) => {
+            const newInventory = req.body;
+            const result = await inventoryCollection.insertOne(newInventory);
+            res.send(result);
         })
     }
     finally {
@@ -47,4 +53,6 @@ app.get("/", (req, res) => {
 
 app.listen(port, () => {
     console.log("listening to port", port)
-})
+});
+
+
